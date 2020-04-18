@@ -213,7 +213,7 @@
 // We must take care that the filesystem never(!) is full, and for that purpose we
 // rather have new records/line of statistics than very old.
 // Of course we must store enough records to make the filesystem work
-#define _STAT_LOG 1
+#define _STAT_LOG 0
 
 
 
@@ -237,16 +237,16 @@
 
 // Gateway Ident definitions. Where is the gateway located?
 #define _DESCRIPTION "ESP Gateway"			// Name of the gateway
-#define _EMAIL "mw12554@hotmail.com"		// Owner
-#define _PLATFORM "ESP8266"
-#define _LAT 52.237367
-#define _LON 5.978654
-#define _ALT 14								// Altitude
+#define _EMAIL "dailynews@justmail.de"		// Owner
+#define _PLATFORM "ESP32"
+#define _LAT 54.8
+#define _LON 9.3
+#define _ALT 30								// Altitude
 
 
 // ntp
 // Please add daylight saving time to NTP_TIMEZONES when desired
-#define NTP_TIMESERVER "nl.pool.ntp.org"	// Country and region specific
+#define NTP_TIMESERVER "de.pool.ntp.org"	// Country and region specific
 #define NTP_TIMEZONES	1					// How far is our Timezone from UTC (excl daylight saving/summer time)
 #define SECS_IN_HOUR	3600
 #define NTP_INTR 0							// Do NTP processing with interrupts or in loop();
@@ -270,8 +270,8 @@
 // 1: Use the nodes as a translation table for hex codes to names (in TLN)
 // 2: Same as 1, but is nodes NOT in the nodes list below they are NOT shown
 // NOTE: We probably will make this list dynamic!
-#define _TRUSTED_NODES 1
-#define _TRUSTED_DECODE 1
+#define _TRUSTED_NODES 0
+#define _TRUSTED_DECODE 0
 
 
 
