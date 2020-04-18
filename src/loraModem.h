@@ -256,6 +256,26 @@ struct pins {
 #define GPS_TX 12
 #endif // _GPS
 
+#elif _PIN_OUT==5
+// ----------------------------------------------------------------------------
+// For ESP32/TTGO T-Beam board.
+struct pins {
+	uint8_t dio0=26;		// GPIO26 / Dio0 used for one frequency and one SF
+	uint8_t dio1=33;		// GPIO33 / Used for CAD, may or not be shared with DIO0
+	uint8_t dio2=32;		// GPIO32 / Used for frequency hopping, don't care
+	uint8_t ss=18;			// GPIO18 / CS. Select pin connected to GPIO18
+	uint8_t rst=23;			// GPIO23 / D3. Reset pin not used	
+} pins;
+#define SCK 5
+#define MISO 19
+#define MOSI 27
+#define RST 23
+#define SS 18
+
+#if _GPS==1
+#define GPS_RX 15
+#define GPS_TX 12
+#endif // _GPS
 
 #else
 // ----------------------------------------------------------------------------
