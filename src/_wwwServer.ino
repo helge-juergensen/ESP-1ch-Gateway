@@ -678,6 +678,10 @@ static void gatewaySettings()
 	response +="<td style=\"width:30px;\" colspan=\"2\" class=\"cell\" ><input type=\"button\" value=\"BOOT    \" onclick=\"ynDialog(\'Do you want to reset boots?\',\'BOOT\')\" /></td></tr>";
 #endif //_STATISTICS
 
+	response +="<tr><td class=\"cell\">System Reboot</td>";
+	response +="<td class=\"cell\" colspan=\"2\" ></td>";
+	response +="<td style=\"width:30px;\" colspan=\"2\" class=\"cell\" ><input type=\"button\" value=\"REBOOT    \" onclick=\"ynDialog(\'Do you want to reboot?\',\'REBOOT\')\" /></td></tr>";
+	
 	response +="</table>";
 	
 	server.sendContent(response);
