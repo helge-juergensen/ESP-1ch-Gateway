@@ -107,7 +107,7 @@
 // This parameters contains the default value of SF, the actual version can be set with
 // the webserver and it will be stored in SPIFF
 // NOTE: The frequency is set in the loraModem.h file and is default 868.100000 MHz.
-#define _SPREADING SF9
+#define _SPREADING SF7
 
 
 // Channel Activity Detection
@@ -117,7 +117,7 @@
 // continuous listen mode.
 // Using this function means that we HAVE to use more dio pins on the RFM95/sx1276
 // device and also connect enable dio1 to detect this state. 
-#define _CAD 1
+#define _CAD 0
 
 // CRCCHECK
 // Defines whether we should check on the CRC of RXDONE messages (see stateMachine.ino)
