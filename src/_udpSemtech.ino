@@ -497,8 +497,14 @@ void sendstat() {
 	
     int j = snprintf((char *)(status_report + stat_index), STATUS_SIZE-stat_index, 
 		"{\"stat\":{\"time\":\"%s\",\"lati\":%s,\"long\":%s,\"alti\":%i,\"rxnb\":%u,\"rxok\":%u,\"rxfw\":%u,\"ackr\":%u.0,\"dwnb\":%u,\"txnb\":%u,\"pfrm\":\"%s\",\"mail\":\"%s\",\"desc\":\"%s\"}}", 
-		stat_timestamp, clat, clon, (int)alt, statc.msg_ttl, statc.msg_ok, statc.msg_down, 0, 0, 0, platform, email, description);
-		
+		stat_timestamp, clat, clon, (int)alt, 
+#if _STATISTICS >= 1
+		statc.msg_ttl, statc.msg_ok, statc.msg_down,
+#else
+		0, 0, 0,
+#endif
+		0, 0, 0, platform, email, description);
+
 	yield();												// Give way to the internal housekeeping of the ESP8266
 
     stat_index += j;

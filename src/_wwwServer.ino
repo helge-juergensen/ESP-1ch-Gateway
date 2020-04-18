@@ -665,17 +665,19 @@ static void gatewaySettings()
 	response +="<td style=\"width:30px;\" colspan=\"2\" class=\"cell\"><input type=\"button\" value=\"FORMAT\" onclick=\"ynDialog(\'Do you really want to format?\',\'FORMAT\')\" /></td></tr>";
 
 	// Reset all statistics
-#if _STATISTICS >= 1
+#if _STATISTICS >= 2
 	response +="<tr><td class=\"cell\">Statistics</td>";
 	response +=String() + "<td class=\"cell\" colspan=\"2\" >"+statc.resets+"</td>";
 	response +="<td style=\"width:30px;\" colspan=\"2\" class=\"cell\"><input type=\"button\" value=\"RESET   \" onclick=\"ynDialog(\'Do you really want to reset statistics?\',\'RESET\')\" /></td></tr>";
+#endif
 
+#if _STATISTICS >= 1
 	// Reset Node
 	response +="<tr><td class=\"cell\">Boots and Resets</td>";
 	response +=String() + "<td class=\"cell\" colspan=\"2\" >"+gwayConfig.boots+"</td>";
 	response +="<td style=\"width:30px;\" colspan=\"2\" class=\"cell\" ><input type=\"button\" value=\"BOOT    \" onclick=\"ynDialog(\'Do you want to reset boots?\',\'BOOT\')\" /></td></tr>";
 #endif //_STATISTICS
-	
+
 	response +="</table>";
 	
 	server.sendContent(response);
@@ -715,7 +717,9 @@ static void statisticsData()
 		response +="<td class=\"cell\">" + String(statc.msg_down_1) + "</td>";
 		response +="<td class=\"cell\">" + String(statc.msg_down_2) + "</td>"; 
 #	endif
+#if _STATISTICS >= 1
 	response += "<td class=\"cell\">" + String(statc.msg_down) + "</td>";
+#endif
 	response +="<td class=\"cell\"></td></tr>";
 		
 	response +="<tr><td class=\"cell\">Packages Uplink Total</td>";
@@ -724,8 +728,11 @@ static void statisticsData()
 		response +="<td class=\"cell\">" + String(statc.msg_ttl_1) + "</td>";
 		response +="<td class=\"cell\">" + String(statc.msg_ttl_2) + "</td>";
 #	endif //_STATISTICS==3
+#if _STATISTICS >= 1
 	response +="<td class=\"cell\">" + String(statc.msg_ttl) + "</td>";
-	response +="<td class=\"cell\">" + String((statc.msg_ttl*3600)/(now() - startTime)) + "</td></tr>";
+	response +="<td class=\"cell\">" + String((statc.msg_ttl*3600)/(now() - startTime)) + "</td>";
+#endif
+	response +="</tr>";
 
 #	if _GATEWAYNODE==1
 		response +="<tr><td class=\"cell\">Packages Internal Sensor</td>";
@@ -744,8 +751,11 @@ static void statisticsData()
 		response +="<td class=\"cell\">" + String(statc.msg_ok_1) + "</td>";
 		response +="<td class=\"cell\">" + String(statc.msg_ok_2) + "</td>";
 #	endif //_STATISTICS==3
+#if _STATISTICS >= 1
 	response +="<td class=\"cell\">" + String(statc.msg_ok) + "</td>";
-	response +="<td class=\"cell\">" + String((statc.msg_ok*3600)/(now() - startTime)) + "</td></tr>";
+	response +="<td class=\"cell\">" + String((statc.msg_ok*3600)/(now() - startTime)) + "</td>";
+#endif
+	response +="</tr>";
 		
 
 	// Provide a table with all the SF data including percentage of messsages
@@ -1320,10 +1330,12 @@ void setupWWW()
 		mPrint("RESET");
 		startTime= now() - 1;					// Reset all timers too (-1 to avoid division by 0)
 		
+#if _STATISTICS >= 1
 		statc.msg_ttl = 0;						// Reset ALL package statistics
 		statc.msg_ok = 0;
 		statc.msg_down = 0;
 		statc.msg_sens = 0;
+#endif
 		
 #if _STATISTICS >= 3
 		statc.msg_ttl_0 = 0;

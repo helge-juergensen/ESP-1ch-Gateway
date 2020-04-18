@@ -214,13 +214,16 @@ int sendPacket(uint8_t *buf, uint8_t length)
 #	endif //_MONITOR
 
 	// Update downstream statistics
+#if _STATISTICS >= 1
 	statc.msg_down++;
+#endif
+#	if _STATISTICS>=3
 	switch(statr[0].ch) {
 		case 0: statc.msg_down_0++; break;
 		case 1: statc.msg_down_1++; break;
 		case 2: statc.msg_down_2++; break;
 	}
-
+#	endif
 #	if _MONITOR>=1
 	if (( debug>=2 ) && ( pdebug & P_TX )) {
 		mPrint("T sendPacket:: fini OK");
